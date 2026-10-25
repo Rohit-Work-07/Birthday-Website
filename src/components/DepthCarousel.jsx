@@ -387,11 +387,11 @@ const DepthCarousel = ({
         <>
           <button
             type="button"
-            className="absolute left-4 top-1/2 z-[3000] grid h-[42px] w-[42px] -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-[rgba(18,20,26,0.55)] text-white backdrop-blur-md transition-[background,border-color,transform] duration-200 hover:border-white/40 hover:bg-[rgba(28,31,40,0.85)] active:scale-95 cursor-pointer"
+            className="absolute left-1.5 sm:left-4 top-1/2 z-[3000] grid h-8 w-8 sm:h-[42px] sm:w-[42px] -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-[rgba(18,20,26,0.65)] text-white backdrop-blur-md transition-[background,border-color,transform] duration-200 hover:border-white/40 hover:bg-[rgba(28,31,40,0.85)] active:scale-90 cursor-pointer shadow-md"
             aria-label="Previous slide"
             onClick={() => navigateBy(-1)}
           >
-            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <svg viewBox="0 0 24 24" className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true">
               <path
                 d="M15 5l-7 7 7 7"
                 fill="none"
@@ -404,11 +404,11 @@ const DepthCarousel = ({
           </button>
           <button
             type="button"
-            className="absolute right-4 top-1/2 z-[3000] grid h-[42px] w-[42px] -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-[rgba(18,20,26,0.55)] text-white backdrop-blur-md transition-[background,border-color,transform] duration-200 hover:border-white/40 hover:bg-[rgba(28,31,40,0.85)] active:scale-95 cursor-pointer"
+            className="absolute right-1.5 sm:right-4 top-1/2 z-[3000] grid h-8 w-8 sm:h-[42px] sm:w-[42px] -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-[rgba(18,20,26,0.65)] text-white backdrop-blur-md transition-[background,border-color,transform] duration-200 hover:border-white/40 hover:bg-[rgba(28,31,40,0.85)] active:scale-90 cursor-pointer shadow-md"
             aria-label="Next slide"
             onClick={() => navigateBy(1)}
           >
-            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <svg viewBox="0 0 24 24" className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true">
               <path
                 d="M9 5l7 7-7 7"
                 fill="none"
@@ -424,7 +424,7 @@ const DepthCarousel = ({
 
       {showIndicators && count > 1 && (
         <div
-          className="absolute bottom-4 left-1/2 z-[3000] flex -translate-x-1/2 gap-2 rounded-full bg-[rgba(14,16,22,0.4)] px-3 py-2 backdrop-blur-sm"
+          className="absolute bottom-2 sm:bottom-4 left-1/2 z-[3000] flex max-w-[88vw] overflow-x-auto no-scrollbar -translate-x-1/2 gap-1.5 sm:gap-2 rounded-full bg-[rgba(14,16,22,0.5)] px-2.5 py-1.5 sm:px-3 sm:py-2 backdrop-blur-sm"
           role="tablist"
           aria-label="Slides"
         >
@@ -435,8 +435,8 @@ const DepthCarousel = ({
               role="tab"
               aria-selected={active === i}
               aria-label={`Go to slide ${i + 1}`}
-              className={`h-[7px] cursor-pointer rounded-full transition-[width,background] duration-[250ms] ${
-                active === i ? 'w-5 bg-white' : 'w-[7px] bg-white/30'
+              className={`h-[6px] sm:h-[7px] cursor-pointer rounded-full transition-[width,background] duration-[250ms] shrink-0 ${
+                active === i ? 'w-4 sm:w-5 bg-white' : 'w-[6px] sm:w-[7px] bg-white/30'
               }`}
               onClick={() => setFocus(i, true)}
             />

@@ -22,7 +22,9 @@ export default function VerticalImageStack({ theme = 'dark' }) {
   const [dragOffset, setDragOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const startYRef = useRef(0);
+  const startXRef = useRef(0);
   const currentDragYRef = useRef(0);
+  const currentDragXRef = useRef(0);
   const lastNavigationTime = useRef(0);
   const navigationCooldown = 380; // ms between navigations
   const containerRef = useRef(null);
@@ -43,30 +45,41 @@ export default function VerticalImageStack({ theme = 'dark' }) {
   // Mouse / Touch Drag handlers
   const handlePointerDown = (e) => {
     setIsDragging(true);
-    startYRef.current = e.clientY || (e.touches && e.touches[0].clientY) || 0;
+    const clientY = e.clientY ?? (e.touches && e.touches[0]?.clientY) ?? 0;
+    const clientX = e.clientX ?? (e.touches && e.touches[0]?.clientX) ?? 0;
+    startYRef.current = clientY;
+    startXRef.current = clientX;
     currentDragYRef.current = 0;
+    currentDragXRef.current = 0;
     setDragOffset(0);
   };
 
   const handlePointerMove = (e) => {
     if (!isDragging) return;
-    const currentY = e.clientY || (e.touches && e.touches[0].clientY) || 0;
-    const delta = currentY - startYRef.current;
-    currentDragYRef.current = delta;
-    setDragOffset(delta * 0.4); // Elastic damping factor
+    const clientY = e.clientY ?? (e.touches && e.touches[0]?.clientY) ?? 0;
+    const clientX = e.clientX ?? (e.touches && e.touches[0]?.clientX) ?? 0;
+    const deltaY = clientY - startYRef.current;
+    const deltaX = clientX - startXRef.current;
+    currentDragYRef.current = deltaY;
+    currentDragXRef.current = deltaX;
+    setDragOffset(deltaY * 0.4); // Elastic damping factor
   };
 
   const handlePointerUp = () => {
     if (!isDragging) return;
     setIsDragging(false);
-    const threshold = 40;
-    if (currentDragYRef.current < -threshold) {
+    const threshold = 35;
+    const dy = currentDragYRef.current;
+    const dx = currentDragXRef.current;
+
+    if (dy < -threshold || dx < -threshold) {
       navigate(1);
-    } else if (currentDragYRef.current > threshold) {
+    } else if (dy > threshold || dx > threshold) {
       navigate(-1);
     }
     setDragOffset(0);
     currentDragYRef.current = 0;
+    currentDragXRef.current = 0;
   };
 
   // Wheel listener scoped to the container
@@ -171,11 +184,11 @@ export default function VerticalImageStack({ theme = 'dark' }) {
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerUp}
-      className="relative flex h-[580px] sm:h-[640px] w-full max-w-[360px] sm:max-w-[420px] items-center justify-center select-none touch-none"
+      className="relative flex h-[510px] xs:h-[570px] sm:h-[640px] w-full max-w-[330px] xs:max-w-[360px] sm:max-w-[420px] items-center justify-center select-none touch-pan-y"
     >
       {/* 3D Perspective Card Stack Area */}
       <div
-        className="relative flex h-[480px] w-[280px] sm:w-[320px] items-center justify-center cursor-grab active:cursor-grabbing"
+        className="relative flex h-[430px] xs:h-[480px] w-[250px] xs:w-[280px] sm:w-[320px] items-center justify-center cursor-pointer"
         style={{ perspective: '1200px' }}
       >
         {images.map((image, index) => {
@@ -186,7 +199,11 @@ export default function VerticalImageStack({ theme = 'dark' }) {
           return (
             <div
               key={image.id}
-              className="absolute transition-transform duration-400 ease-out will-change-transform"
+              onClick={() => {
+                if (isCurrent) navigate(1);
+                else setCurrentIndex(index);
+              }}
+              className="absolute transition-transform duration-400 ease-out will-change-transform cursor-pointer"
               style={{
                 transform: `translate3d(0, ${style.y}px, 0) scale(${style.scale}) rotateX(${style.rotateX}deg)`,
                 opacity: style.opacity,
@@ -198,7 +215,7 @@ export default function VerticalImageStack({ theme = 'dark' }) {
             >
               {/* Individual Card Container */}
               <div
-                className={`relative h-[390px] w-[265px] sm:h-[430px] sm:w-[295px] overflow-hidden rounded-3xl border transition-all duration-300 ${
+                className={`relative h-[340px] w-[235px] xs:h-[385px] xs:w-[260px] sm:h-[430px] sm:w-[295px] overflow-hidden rounded-3xl border transition-all duration-300 ${
                   isDark
                     ? isCurrent
                       ? 'border-rose-500/40 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.85),0_0_35px_rgba(244,63,94,0.3)] ring-1 ring-white/10'
@@ -236,7 +253,7 @@ export default function VerticalImageStack({ theme = 'dark' }) {
       </div>
 
       {/* Right Navigation Dots */}
-      <div className="absolute right-1 sm:right-2 top-1/2 flex -translate-y-1/2 flex-col gap-2 z-20">
+      <div className="absolute right-0 sm:right-2 top-1/2 flex -translate-y-1/2 flex-col gap-2 z-20">
         {images.map((_, index) => (
           <button
             key={index}
@@ -257,7 +274,7 @@ export default function VerticalImageStack({ theme = 'dark' }) {
       </div>
 
       {/* Left Counter */}
-      <div className="absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 z-20">
+      <div className="absolute left-0 sm:left-2 top-1/2 -translate-y-1/2 z-20">
         <div className="flex flex-col items-center select-none">
           <span
             className={`font-roman text-2xl sm:text-3xl font-normal ${
@@ -267,7 +284,7 @@ export default function VerticalImageStack({ theme = 'dark' }) {
             {String(currentIndex + 1).padStart(2, '0')}
           </span>
           <div
-            className={`my-1.5 h-px w-6 ${
+            className={`my-1.5 h-px w-5 sm:w-6 ${
               isDark ? 'bg-white/20' : 'bg-black/20'
             }`}
           />
@@ -281,10 +298,10 @@ export default function VerticalImageStack({ theme = 'dark' }) {
         </div>
       </div>
 
-      {/* Bottom Swipe / Scroll Hint */}
-      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 text-[11px] font-medium tracking-widest uppercase opacity-70 pointer-events-none z-20">
+      {/* Bottom Swipe / Tap Hint */}
+      <div className="absolute bottom-1 sm:bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 text-[10px] sm:text-[11px] font-medium tracking-widest uppercase opacity-70 pointer-events-none z-20">
         <span className="animate-bounce">↕</span>
-        <span>Scroll or drag</span>
+        <span>Tap or swipe card</span>
       </div>
     </div>
   );

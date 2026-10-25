@@ -66,8 +66,8 @@ export default function Home({ setActivePage, theme = 'dark' }) {
     <div className="w-full flex flex-col select-none">
       
       {/* ──────────────── 1. HERO SECTION (FULL SCREEN) ──────────────── */}
-      <section className="min-h-[calc(100vh-90px)] flex flex-col items-center justify-center px-4 sm:px-6 relative py-8 sm:py-12 overflow-hidden">
-        <div className="w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-14 my-auto z-10">
+      <section className="min-h-[calc(100dvh-70px)] flex flex-col items-center justify-center px-3 sm:px-6 relative py-6 sm:py-12 overflow-hidden">
+        <div className="w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-center gap-6 sm:gap-8 lg:gap-14 my-auto z-10">
           
           {/* Left Column: Scrapbook Photo Collage (from Assets) */}
           <div className="w-full lg:w-1/2 flex justify-center order-2 lg:order-1 lg:-translate-x-8 xl:-translate-x-14">
@@ -80,14 +80,14 @@ export default function Home({ setActivePage, theme = 'dark' }) {
           </div>
 
           {/* Right Column: Hero Typography & Greeting */}
-          <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left space-y-2 sm:space-y-3 order-1 lg:order-2">
+          <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left space-y-2 sm:space-y-3 order-1 lg:order-2 px-2">
             {/* Line 1: Happy Birthday */}
-            <h1 className="font-cormorant text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-medium sm:font-semibold tracking-wide leading-tight">
+            <h1 className="font-cormorant text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium sm:font-semibold tracking-wide leading-tight">
               Happy Birthday
             </h1>
 
             {/* Line 2: My [Rotating Word + Heart Emoji] */}
-            <h2 className="font-cormorant italic text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-normal sm:font-medium text-red-400 tracking-normal leading-tight drop-shadow-[0_0_20px_rgba(248,113,113,0.35)] flex items-center justify-center lg:justify-start gap-2 sm:gap-3 h-12 sm:h-16">
+            <h2 className="font-cormorant italic text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal sm:font-medium text-red-400 tracking-normal leading-tight drop-shadow-[0_0_20px_rgba(248,113,113,0.35)] flex items-center justify-center lg:justify-start gap-2 sm:gap-3 h-10 sm:h-16">
               <span>My</span>
               <span
                 className={`inline-flex items-center gap-1.5 transition-all duration-350 ease-out ${
@@ -97,32 +97,32 @@ export default function Home({ setActivePage, theme = 'dark' }) {
                 }`}
               >
                 <span>{rotatingTitles[titleIndex].text}</span>
-                <span className="not-italic text-xl sm:text-3xl md:text-4xl inline-block drop-shadow-sm select-none">
+                <span className="not-italic text-lg sm:text-3xl md:text-4xl inline-block drop-shadow-sm select-none">
                   {rotatingTitles[titleIndex].emoji}
                 </span>
               </span>
             </h2>
 
             {/* Rephrased Romantic Quote */}
-            <div className="pt-2 sm:pt-4 max-w-lg">
-              <p className="font-cormorant italic text-lg sm:text-xl md:text-2xl font-normal opacity-90 leading-relaxed tracking-wide">
+            <div className="pt-1 sm:pt-4 max-w-lg">
+              <p className="font-cormorant italic text-base sm:text-xl md:text-2xl font-normal opacity-90 leading-relaxed tracking-wide">
                 “On this day, you weren't just born — I found a friend, my best friend, and my girlfriend all in one.”
               </p>
             </div>
 
             {/* "A little note about you" Button */}
-            <div className="pt-4 sm:pt-6">
+            <div className="pt-3 sm:pt-6">
               <button
                 type="button"
                 onClick={() => setIsNoteOpen(true)}
-                className={`group inline-flex items-center gap-2.5 px-6 sm:px-7 py-2.5 rounded-full text-base sm:text-lg font-cormorant font-medium tracking-wide transition-all duration-300 border cursor-pointer ${
+                className={`group inline-flex items-center gap-2 sm:gap-2.5 px-5 sm:px-7 py-2 sm:py-2.5 rounded-full text-sm sm:text-lg font-cormorant font-medium tracking-wide transition-all duration-300 border cursor-pointer ${
                   isDark
                     ? 'border-red-500/40 bg-red-500/10 hover:bg-red-500/20 text-white shadow-[0_0_20px_rgba(239,68,68,0.25)] hover:shadow-[0_0_30px_rgba(239,68,68,0.5)]'
                     : 'border-red-400/50 bg-red-50 hover:bg-red-100 text-gray-900 shadow-sm hover:shadow-md'
                 } hover:scale-105 active:scale-95`}
               >
                 <svg
-                  className="w-4 h-4 text-red-400 group-hover:scale-110 transition-transform duration-300"
+                  className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-red-400 group-hover:scale-110 transition-transform duration-300"
                   viewBox="0 0 24 24"
                   fill="currentColor"
                 >
@@ -135,11 +135,11 @@ export default function Home({ setActivePage, theme = 'dark' }) {
         </div>
 
         {/* Subtle Scroll Down Indicator */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 opacity-60 hover:opacity-100 transition-opacity">
-          <span className="font-cormorant text-xs sm:text-sm tracking-widest uppercase">
+        <div className="absolute bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-60 hover:opacity-100 transition-opacity">
+          <span className="font-cormorant text-[11px] sm:text-sm tracking-widest uppercase">
             Scroll down for a message
           </span>
-          <svg className="w-4 h-4 animate-bounce text-red-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-bounce text-red-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
           </svg>
         </div>
@@ -184,14 +184,14 @@ export default function Home({ setActivePage, theme = 'dark' }) {
             
             {/* Left Column: Luxury White Letter Card */}
             <div className="w-full lg:w-7/12 flex justify-center lg:justify-end">
-              <div className="relative bg-white/95 backdrop-blur-md rounded-[28px] p-7 sm:p-10 md:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.25)] border border-rose-200/50 text-left transition-transform duration-300 hover:scale-[1.01] w-full max-w-xl">
+              <div className="relative bg-white/95 backdrop-blur-md rounded-[24px] sm:rounded-[28px] p-5 xs:p-7 sm:p-10 md:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.25)] border border-rose-200/50 text-left transition-transform duration-300 hover:scale-[1.01] w-full max-w-xl">
                 {/* Large Translucent Quote Icon */}
-                <div className="text-rose-200/70 font-serif text-6xl sm:text-7xl leading-none select-none -mb-3">
+                <div className="text-rose-200/70 font-serif text-5xl sm:text-7xl leading-none select-none -mb-2 sm:-mb-3">
                   “
                 </div>
 
                 {/* Letter Body (Ready for your personal words) */}
-                <div className="font-cormorant text-lg sm:text-xl font-normal leading-relaxed text-[#3b2733] space-y-4">
+                <div className="font-cormorant text-base sm:text-xl font-normal leading-relaxed text-[#3b2733] space-y-3 sm:space-y-4">
                   <p>
                     Dear <span className="font-semibold text-rose-600">Kavya</span> — where do I even begin? Every single moment spent with you has been a treasure I hold close to my heart. Watching you grow, smile, and shine has been the greatest joy of my life. You make every ordinary day feel like magic just by being in it.
                   </p>
@@ -199,13 +199,13 @@ export default function Home({ setActivePage, theme = 'dark' }) {
                 </div>
 
                 {/* Sign-off Footer */}
-                <div className="mt-8 pt-6 border-t border-rose-100 flex flex-col items-start">
-                  <span className="text-[11px] sm:text-xs tracking-[0.25em] uppercase text-rose-400 font-semibold mb-1">
+                <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-rose-100 flex flex-col items-start">
+                  <span className="text-[10px] sm:text-xs tracking-[0.25em] uppercase text-rose-400 font-semibold mb-1">
                     WITH ALL MY LOVE,
                   </span>
-                  <div className="flex items-center gap-2 font-cormorant italic text-2xl sm:text-3xl text-rose-600 font-medium">
+                  <div className="flex items-center gap-2 font-cormorant italic text-xl sm:text-3xl text-rose-600 font-medium">
                     <span>— Rohit</span>
-                    <span className="not-italic text-xl">🎂 ✨</span>
+                    <span className="not-italic text-lg sm:text-xl">🎂 ✨</span>
                   </div>
                 </div>
               </div>
@@ -217,8 +217,8 @@ export default function Home({ setActivePage, theme = 'dark' }) {
                 items={wordsFromHeartItems}
                 title={null}
               />
-              <p className="font-cormorant italic text-sm sm:text-base opacity-80 mt-2 text-center">
-                Hover to fan out memories • Click to bring to front ✨
+              <p className="font-cormorant italic text-xs sm:text-base opacity-80 mt-1 sm:mt-2 text-center">
+                Tap card to bring to front • Tap stack to fan out ✨
               </p>
             </div>
 
@@ -229,16 +229,16 @@ export default function Home({ setActivePage, theme = 'dark' }) {
 
       {/* ──────────────── 3. "CELEBRATING YOU" SECTION (WITH VERTICAL IMAGE STACK BESIDE IT) ──────────────── */}
       <section
-        className={`relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-8 py-20 lg:py-28 transition-colors duration-700 overflow-hidden ${
+        className={`relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-8 py-16 sm:py-24 lg:py-28 transition-colors duration-700 overflow-hidden ${
           isDark
             ? 'bg-[#180f33] text-purple-100 shadow-inner'
             : 'bg-[#FFF6ED] text-[#2b1722]'
         }`}
       >
-        <div className="w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
+        <div className="w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-12 lg:gap-16">
           
           {/* Left Column: Celebrating You text & 24 Milestone */}
-          <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6 sm:space-y-8">
+          <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left space-y-4 sm:space-y-6">
             {/* Eyebrow badge */}
             <div className="inline-flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping"></span>
@@ -249,22 +249,22 @@ export default function Home({ setActivePage, theme = 'dark' }) {
             </div>
 
             {/* Big Milestone Number - Classical Roman Serif Font */}
-            <div className="py-2">
-              <span className="font-roman font-normal text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] text-red-500 tracking-normal leading-none drop-shadow-[0_2px_20px_rgba(239,68,68,0.25)] block select-none">
+            <div className="py-1 sm:py-2">
+              <span className="font-roman font-normal text-6xl xs:text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] text-red-500 tracking-normal leading-none drop-shadow-[0_2px_20px_rgba(239,68,68,0.25)] block select-none">
                 {lifeStats.years}
               </span>
-              <span className="font-cormorant italic text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium mt-3 block leading-tight">
+              <span className="font-cormorant italic text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium mt-2 sm:mt-3 block leading-tight">
                 Years of being the coolest, sweetest & most amazing person
               </span>
             </div>
 
             {/* Friendly & Loving Sentences (Conversational & Warm) */}
-            <div className="space-y-4 max-w-xl">
-              <p className="font-cormorant text-lg sm:text-xl lg:text-2xl font-normal leading-relaxed opacity-95">
+            <div className="space-y-3 sm:space-y-4 max-w-xl">
+              <p className="font-cormorant text-base sm:text-xl lg:text-2xl font-normal leading-relaxed opacity-95">
                 That’s over <span className="font-semibold text-red-500">{lifeStats.days.toLocaleString()} days</span> of your cute smile, your funny jokes, your random chaos, and just making life so much brighter for everyone around you.
               </p>
               
-              <p className={`font-cormorant italic text-base sm:text-lg lg:text-xl font-medium leading-relaxed ${
+              <p className={`font-cormorant italic text-sm sm:text-lg lg:text-xl font-medium leading-relaxed ${
                 isDark ? 'text-purple-300' : 'text-[#8a3359]'
               }`}>
                 “Honestly, everything is 100 times better, funnier, and more fun with you around. Happy 24th, my favorite human! 🥳🎉”
@@ -280,7 +280,7 @@ export default function Home({ setActivePage, theme = 'dark' }) {
           </div>
 
           {/* Right Column: 3D Vertical Image Stack */}
-          <div className="w-full lg:w-1/2 flex justify-center items-center py-4">
+          <div className="w-full lg:w-1/2 flex justify-center items-center py-2 sm:py-4">
             <VerticalImageStack theme={theme} />
           </div>
 
@@ -319,11 +319,11 @@ export default function Home({ setActivePage, theme = 'dark' }) {
           role="dialog"
           aria-modal="true"
           onClick={() => setIsNoteOpen(false)}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-fade-in"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 xs:p-4 bg-black/60 backdrop-blur-md animate-fade-in"
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className={`relative w-full max-w-lg p-8 sm:p-10 rounded-3xl border shadow-2xl transition-all duration-300 ${
+            className={`relative w-full max-w-lg max-h-[90dvh] overflow-y-auto p-6 xs:p-8 sm:p-10 rounded-2xl sm:rounded-3xl border shadow-2xl transition-all duration-300 ${
               isDark
                 ? 'bg-[#0f1017]/95 border-white/15 text-white shadow-[0_0_50px_rgba(0,0,0,0.8)]'
                 : 'bg-white/95 border-black/10 text-gray-900 shadow-2xl'
@@ -333,7 +333,7 @@ export default function Home({ setActivePage, theme = 'dark' }) {
             <button
               type="button"
               onClick={() => setIsNoteOpen(false)}
-              className="absolute top-5 right-5 p-2 rounded-full opacity-60 hover:opacity-100 hover:scale-110 transition-all cursor-pointer"
+              className="absolute top-4 right-4 sm:top-5 sm:right-5 p-2 rounded-full opacity-60 hover:opacity-100 hover:scale-110 transition-all cursor-pointer"
               aria-label="Close note"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

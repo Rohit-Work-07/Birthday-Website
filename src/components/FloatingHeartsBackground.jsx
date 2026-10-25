@@ -175,7 +175,7 @@ export default function FloatingHeartsBackground({ theme = 'dark', onToggleTheme
           }}
           aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
           title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-          className={`fixed top-4 right-4 z-40 p-2.5 rounded-full transition-all duration-300 backdrop-blur-md cursor-pointer border shadow-md hover:scale-110 active:scale-95 ${
+          className={`fixed top-3 right-3 sm:top-4 sm:right-4 z-40 p-2 sm:p-2.5 rounded-full transition-all duration-300 backdrop-blur-md cursor-pointer border shadow-md hover:scale-110 active:scale-95 ${
             isDark
               ? 'bg-black/40 hover:bg-black/60 border-white/15 text-amber-300 hover:text-amber-200 shadow-[0_0_20px_rgba(251,191,36,0.15)]'
               : 'bg-white/80 hover:bg-white border-black/10 text-stone-700 hover:text-stone-950 shadow-[0_4px_16px_rgba(0,0,0,0.08)]'

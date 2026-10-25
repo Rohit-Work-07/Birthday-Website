@@ -162,11 +162,20 @@ export default function Us({ theme = 'dark' }) {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
+  const [stageHeight, setStageHeight] = useState(() => (typeof window !== 'undefined' && window.innerWidth < 640 ? 370 : 420));
+  useEffect(() => {
+    const handleResize = () => {
+      setStageHeight(window.innerWidth < 640 ? 370 : 420);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
-    <section className="w-full max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-12 flex flex-col items-center select-none">
+    <section className="w-full max-w-5xl mx-auto px-3 sm:px-6 py-4 sm:py-12 flex flex-col items-center select-none">
       
       {/* ──────────────── 1. POLAROID CLOTHESLINE SECTION ("MEMORIES WITH YOU") ──────────────── */}
-      <div className="w-full flex flex-col items-center mb-14 sm:mb-20">
+      <div className="w-full flex flex-col items-center mb-10 sm:mb-20">
         {/* Eyebrow badge with "Memories with you" tag */}
         <div className="inline-flex items-center gap-1.5 mb-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-rose-500 animate-ping" />
@@ -178,14 +187,14 @@ export default function Us({ theme = 'dark' }) {
 
         {/* Section Heading - reduced slightly so big polaroids take center stage */}
         <h1
-          className={`font-cormorant text-2xl sm:text-3xl md:text-4xl font-semibold tracking-wide text-center transition-colors ${
+          className={`font-cormorant text-2xl sm:text-3xl md:text-4xl font-semibold tracking-wide text-center transition-colors px-2 ${
             isDark ? 'text-white' : 'text-[#1a111e]'
           }`}
         >
           Memories With You
         </h1>
         <p
-          className={`font-cormorant italic text-xs sm:text-sm font-normal opacity-85 mt-0.5 text-center max-w-md ${
+          className={`font-cormorant italic text-xs sm:text-sm font-normal opacity-85 mt-0.5 text-center max-w-md px-2 ${
             isDark ? 'text-rose-300' : 'text-rose-600'
           }`}
         >
@@ -196,7 +205,7 @@ export default function Us({ theme = 'dark' }) {
         <div className="w-full mt-2">
           <PolaroidLineCarousel
             slides={polaroidSlides}
-            stageHeight={420}
+            stageHeight={stageHeight}
             cardWidth={295}
             sag={36}
             swing={1.0}
@@ -210,7 +219,7 @@ export default function Us({ theme = 'dark' }) {
 
       {/* ──────────────── 2. TIME TOGETHER LIVE COUNTER ──────────────── */}
       <div
-        className={`w-full max-w-xl p-6 sm:p-8 rounded-3xl backdrop-blur-md border text-center transition-all duration-300 mb-20 sm:mb-28 ${
+        className={`w-full max-w-xl p-4 xs:p-6 sm:p-8 rounded-2xl sm:rounded-3xl backdrop-blur-md border text-center transition-all duration-300 mb-14 sm:mb-28 ${
           isDark
             ? 'bg-gradient-to-b from-[#1b0816]/80 via-[#26091e]/80 to-[#180614]/80 border-rose-500/25 shadow-[0_0_45px_rgba(244,63,94,0.2)] text-white'
             : 'bg-gradient-to-b from-[#FFF5F7] via-[#FCEAEF] to-[#FCE2E8] border-rose-300/80 shadow-lg text-[#2b1722]'
@@ -225,17 +234,17 @@ export default function Us({ theme = 'dark' }) {
         </span>
 
         {/* Live Ticker Grid with soft translucent cards */}
-        <div className="grid grid-cols-4 gap-2 sm:gap-4 my-6 text-center">
+        <div className="grid grid-cols-4 gap-1.5 xs:gap-2.5 sm:gap-4 my-4 sm:my-6 text-center">
           <div
-            className={`p-2 sm:p-3 rounded-2xl border transition-all ${
+            className={`p-1.5 xs:p-2 sm:p-3 rounded-xl sm:rounded-2xl border transition-all ${
               isDark ? 'bg-rose-950/30 border-rose-500/20' : 'bg-white/80 border-rose-200/90 shadow-xs'
             }`}
           >
-            <span className="font-roman text-3xl sm:text-5xl font-normal text-rose-500 block">
+            <span className="font-roman text-2xl xs:text-3xl sm:text-5xl font-normal text-rose-500 block">
               {timeTogether.days}
             </span>
             <span
-              className={`text-[10px] sm:text-xs tracking-wider uppercase font-medium ${
+              className={`text-[9px] xs:text-[10px] sm:text-xs tracking-wider uppercase font-medium ${
                 isDark ? 'text-gray-300' : 'text-gray-700'
               }`}
             >
@@ -243,15 +252,15 @@ export default function Us({ theme = 'dark' }) {
             </span>
           </div>
           <div
-            className={`p-2 sm:p-3 rounded-2xl border transition-all ${
+            className={`p-1.5 xs:p-2 sm:p-3 rounded-xl sm:rounded-2xl border transition-all ${
               isDark ? 'bg-rose-950/30 border-rose-500/20' : 'bg-white/80 border-rose-200/90 shadow-xs'
             }`}
           >
-            <span className="font-roman text-3xl sm:text-5xl font-normal text-rose-500 block">
+            <span className="font-roman text-2xl xs:text-3xl sm:text-5xl font-normal text-rose-500 block">
               {String(timeTogether.hours).padStart(2, '0')}
             </span>
             <span
-              className={`text-[10px] sm:text-xs tracking-wider uppercase font-medium ${
+              className={`text-[9px] xs:text-[10px] sm:text-xs tracking-wider uppercase font-medium ${
                 isDark ? 'text-gray-300' : 'text-gray-700'
               }`}
             >
@@ -259,15 +268,15 @@ export default function Us({ theme = 'dark' }) {
             </span>
           </div>
           <div
-            className={`p-2 sm:p-3 rounded-2xl border transition-all ${
+            className={`p-1.5 xs:p-2 sm:p-3 rounded-xl sm:rounded-2xl border transition-all ${
               isDark ? 'bg-rose-950/30 border-rose-500/20' : 'bg-white/80 border-rose-200/90 shadow-xs'
             }`}
           >
-            <span className="font-roman text-3xl sm:text-5xl font-normal text-rose-500 block">
+            <span className="font-roman text-2xl xs:text-3xl sm:text-5xl font-normal text-rose-500 block">
               {String(timeTogether.minutes).padStart(2, '0')}
             </span>
             <span
-              className={`text-[10px] sm:text-xs tracking-wider uppercase font-medium ${
+              className={`text-[9px] xs:text-[10px] sm:text-xs tracking-wider uppercase font-medium ${
                 isDark ? 'text-gray-300' : 'text-gray-700'
               }`}
             >
@@ -275,15 +284,15 @@ export default function Us({ theme = 'dark' }) {
             </span>
           </div>
           <div
-            className={`p-2 sm:p-3 rounded-2xl border transition-all ${
+            className={`p-1.5 xs:p-2 sm:p-3 rounded-xl sm:rounded-2xl border transition-all ${
               isDark ? 'bg-rose-950/30 border-rose-500/20' : 'bg-white/80 border-rose-200/90 shadow-xs'
             }`}
           >
-            <span className="font-roman text-3xl sm:text-5xl font-normal text-rose-500 block">
+            <span className="font-roman text-2xl xs:text-3xl sm:text-5xl font-normal text-rose-500 block">
               {String(timeTogether.seconds).padStart(2, '0')}
             </span>
             <span
-              className={`text-[10px] sm:text-xs tracking-wider uppercase font-medium ${
+              className={`text-[9px] xs:text-[10px] sm:text-xs tracking-wider uppercase font-medium ${
                 isDark ? 'text-gray-300' : 'text-gray-700'
               }`}
             >

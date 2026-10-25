@@ -170,7 +170,7 @@ export default function Wishes({ theme = 'dark', setActivePage }) {
         
         {/* Headline */}
         <h1
-          className={`font-cormorant text-4xl sm:text-6xl md:text-7xl font-semibold tracking-wide leading-tight mb-4 ${
+          className={`font-cormorant text-3xl xs:text-4xl sm:text-6xl md:text-7xl font-semibold tracking-wide leading-tight mb-3 sm:mb-4 px-2 ${
             isDark ? 'text-white' : 'text-stone-900'
           }`}
         >
@@ -179,7 +179,7 @@ export default function Wishes({ theme = 'dark', setActivePage }) {
 
         {/* Warm Friendly Tone Statement (no spoilers) */}
         <p
-          className={`font-cormorant italic text-lg sm:text-2xl max-w-xl mb-8 sm:mb-10 leading-relaxed font-normal ${
+          className={`font-cormorant italic text-base xs:text-lg sm:text-2xl max-w-xl mb-6 sm:mb-10 leading-relaxed font-normal px-2 ${
             isDark ? 'text-rose-200/90' : 'text-stone-700'
           }`}
         >
@@ -187,20 +187,20 @@ export default function Wishes({ theme = 'dark', setActivePage }) {
         </p>
 
         {/* Glowing Modern Glassmorphism Countdown Cards */}
-        <div className="grid grid-cols-4 gap-2.5 sm:gap-5 w-full max-w-2xl mb-8 sm:mb-10">
+        <div className="grid grid-cols-4 gap-1.5 xs:gap-2.5 sm:gap-5 w-full max-w-2xl mb-6 sm:mb-10 px-1">
           {/* Days */}
           <div
-            className={`flex flex-col items-center justify-center py-4 px-2 sm:py-6 sm:px-4 rounded-2xl sm:rounded-3xl border backdrop-blur-xl transition-all duration-300 hover:scale-105 ${
+            className={`flex flex-col items-center justify-center py-3 px-1 xs:py-4 xs:px-2 sm:py-6 sm:px-4 rounded-xl xs:rounded-2xl sm:rounded-3xl border backdrop-blur-xl transition-all duration-300 hover:scale-105 ${
               isDark
                 ? 'bg-gradient-to-b from-white/[0.08] to-white/[0.02] border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] text-white hover:border-rose-500/40'
                 : 'bg-white/85 border-rose-200/80 shadow-[0_8px_24px_rgba(244,63,94,0.08)] text-stone-900 hover:border-rose-400'
             }`}
           >
-            <span className="font-roman text-3xl sm:text-6xl font-normal bg-gradient-to-br from-rose-400 via-pink-400 to-amber-300 bg-clip-text text-transparent block leading-tight">
+            <span className="font-roman text-2xl xs:text-3xl sm:text-6xl font-normal bg-gradient-to-br from-rose-400 via-pink-400 to-amber-300 bg-clip-text text-transparent block leading-tight">
               {timeLeft.days}
             </span>
             <span
-              className={`text-[10px] sm:text-xs font-semibold tracking-widest uppercase mt-2 px-2.5 py-0.5 rounded-full ${
+              className={`text-[9px] xs:text-[10px] sm:text-xs font-semibold tracking-wider uppercase mt-1.5 sm:mt-2 px-1.5 xs:px-2.5 py-0.5 rounded-full ${
                 isDark ? 'bg-white/5 text-rose-300' : 'bg-rose-100/70 text-rose-700'
               }`}
             >
@@ -210,17 +210,17 @@ export default function Wishes({ theme = 'dark', setActivePage }) {
 
           {/* Hours */}
           <div
-            className={`flex flex-col items-center justify-center py-4 px-2 sm:py-6 sm:px-4 rounded-2xl sm:rounded-3xl border backdrop-blur-xl transition-all duration-300 hover:scale-105 ${
+            className={`flex flex-col items-center justify-center py-3 px-1 xs:py-4 xs:px-2 sm:py-6 sm:px-4 rounded-xl xs:rounded-2xl sm:rounded-3xl border backdrop-blur-xl transition-all duration-300 hover:scale-105 ${
               isDark
                 ? 'bg-gradient-to-b from-white/[0.08] to-white/[0.02] border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] text-white hover:border-rose-500/40'
                 : 'bg-white/85 border-rose-200/80 shadow-[0_8px_24px_rgba(244,63,94,0.08)] text-stone-900 hover:border-rose-400'
             }`}
           >
-            <span className="font-roman text-3xl sm:text-6xl font-normal bg-gradient-to-br from-rose-400 via-pink-400 to-amber-300 bg-clip-text text-transparent block leading-tight">
+            <span className="font-roman text-2xl xs:text-3xl sm:text-6xl font-normal bg-gradient-to-br from-rose-400 via-pink-400 to-amber-300 bg-clip-text text-transparent block leading-tight">
               {String(timeLeft.hours).padStart(2, '0')}
             </span>
             <span
-              className={`text-[10px] sm:text-xs font-semibold tracking-widest uppercase mt-2 px-2.5 py-0.5 rounded-full ${
+              className={`text-[9px] xs:text-[10px] sm:text-xs font-semibold tracking-wider uppercase mt-1.5 sm:mt-2 px-1.5 xs:px-2.5 py-0.5 rounded-full ${
                 isDark ? 'bg-white/5 text-rose-300' : 'bg-rose-100/70 text-rose-700'
               }`}
             >
@@ -230,17 +230,17 @@ export default function Wishes({ theme = 'dark', setActivePage }) {
 
           {/* Minutes */}
           <div
-            className={`flex flex-col items-center justify-center py-4 px-2 sm:py-6 sm:px-4 rounded-2xl sm:rounded-3xl border backdrop-blur-xl transition-all duration-300 hover:scale-105 ${
+            className={`flex flex-col items-center justify-center py-3 px-1 xs:py-4 xs:px-2 sm:py-6 sm:px-4 rounded-xl xs:rounded-2xl sm:rounded-3xl border backdrop-blur-xl transition-all duration-300 hover:scale-105 ${
               isDark
                 ? 'bg-gradient-to-b from-white/[0.08] to-white/[0.02] border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] text-white hover:border-rose-500/40'
                 : 'bg-white/85 border-rose-200/80 shadow-[0_8px_24px_rgba(244,63,94,0.08)] text-stone-900 hover:border-rose-400'
             }`}
           >
-            <span className="font-roman text-3xl sm:text-6xl font-normal bg-gradient-to-br from-rose-400 via-pink-400 to-amber-300 bg-clip-text text-transparent block leading-tight">
+            <span className="font-roman text-2xl xs:text-3xl sm:text-6xl font-normal bg-gradient-to-br from-rose-400 via-pink-400 to-amber-300 bg-clip-text text-transparent block leading-tight">
               {String(timeLeft.minutes).padStart(2, '0')}
             </span>
             <span
-              className={`text-[10px] sm:text-xs font-semibold tracking-widest uppercase mt-2 px-2.5 py-0.5 rounded-full ${
+              className={`text-[9px] xs:text-[10px] sm:text-xs font-semibold tracking-wider uppercase mt-1.5 sm:mt-2 px-1.5 xs:px-2.5 py-0.5 rounded-full ${
                 isDark ? 'bg-white/5 text-rose-300' : 'bg-rose-100/70 text-rose-700'
               }`}
             >
@@ -250,17 +250,17 @@ export default function Wishes({ theme = 'dark', setActivePage }) {
 
           {/* Seconds (Pulsing Glow) */}
           <div
-            className={`flex flex-col items-center justify-center py-4 px-2 sm:py-6 sm:px-4 rounded-2xl sm:rounded-3xl border backdrop-blur-xl transition-all duration-300 hover:scale-105 ${
+            className={`flex flex-col items-center justify-center py-3 px-1 xs:py-4 xs:px-2 sm:py-6 sm:px-4 rounded-xl xs:rounded-2xl sm:rounded-3xl border backdrop-blur-xl transition-all duration-300 hover:scale-105 ${
               isDark
                 ? 'bg-gradient-to-b from-rose-950/30 to-purple-950/20 border-rose-500/40 shadow-[0_0_30px_rgba(244,63,94,0.25)] text-white'
                 : 'bg-rose-50/90 border-rose-300 shadow-md text-stone-900'
             }`}
           >
-            <span className="font-roman text-3xl sm:text-6xl font-normal bg-gradient-to-br from-rose-400 via-pink-400 to-amber-300 bg-clip-text text-transparent block leading-tight">
+            <span className="font-roman text-2xl xs:text-3xl sm:text-6xl font-normal bg-gradient-to-br from-rose-400 via-pink-400 to-amber-300 bg-clip-text text-transparent block leading-tight">
               {String(timeLeft.seconds).padStart(2, '0')}
             </span>
             <span
-              className={`text-[10px] sm:text-xs font-semibold tracking-widest uppercase mt-2 px-2.5 py-0.5 rounded-full ${
+              className={`text-[9px] xs:text-[10px] sm:text-xs font-semibold tracking-wider uppercase mt-1.5 sm:mt-2 px-1.5 xs:px-2.5 py-0.5 rounded-full ${
                 isDark ? 'bg-rose-500/20 text-rose-300 animate-pulse' : 'bg-rose-200 text-rose-800'
               }`}
             >

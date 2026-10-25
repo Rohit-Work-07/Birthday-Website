@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import DepthCarousel from '../components/DepthCarousel';
 
 // Explicit imports for all gallery images (up to 20) to guarantee static bundling
@@ -70,10 +70,54 @@ export default function Pics({ theme = 'dark' }) {
     return fromGlob.length > 0 ? fromGlob : staticGalleryPhotos;
   }, [galleryModules]);
 
+  // Dynamic responsive sizing for mobile vs tablet vs desktop
+  const [carouselConfig, setCarouselConfig] = useState(() => {
+    if (typeof window === 'undefined') {
+      return { cardWidth: 360, cardHeight: 470, spread: 100, depth: 230, visibleCards: 4 };
+    }
+    const w = window.innerWidth;
+    if (w < 480) {
+      const cw = Math.min(Math.round(w * 0.72), 265);
+      return {
+        cardWidth: Math.max(cw, 220),
+        cardHeight: Math.round(cw * 1.34),
+        spread: 48,
+        depth: 140,
+        visibleCards: 3,
+      };
+    } else if (w < 768) {
+      return { cardWidth: 295, cardHeight: 395, spread: 72, depth: 180, visibleCards: 4 };
+    }
+    return { cardWidth: 360, cardHeight: 470, spread: 100, depth: 230, visibleCards: 4 };
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      const w = window.innerWidth;
+      if (w < 480) {
+        const cw = Math.min(Math.round(w * 0.72), 265);
+        setCarouselConfig({
+          cardWidth: Math.max(cw, 220),
+          cardHeight: Math.round(cw * 1.34),
+          spread: 48,
+          depth: 140,
+          visibleCards: 3,
+        });
+      } else if (w < 768) {
+        setCarouselConfig({ cardWidth: 295, cardHeight: 395, spread: 72, depth: 180, visibleCards: 4 });
+      } else {
+        setCarouselConfig({ cardWidth: 360, cardHeight: 470, spread: 100, depth: 230, visibleCards: 4 });
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
-    <section className="w-full max-w-6xl mx-auto px-4 h-[calc(100vh-60px)] max-h-[calc(100vh-60px)] overflow-hidden flex flex-col justify-between items-center py-2 sm:py-4 select-none">
+    <section className="w-full max-w-6xl mx-auto px-2 sm:px-4 h-[calc(100dvh-60px)] max-h-[calc(100dvh-60px)] overflow-hidden flex flex-col justify-between items-center py-2 sm:py-4 select-none">
       {/* Compact Page Title */}
-      <div className="text-center shrink-0 flex flex-col items-center">
+      <div className="text-center shrink-0 flex flex-col items-center px-2">
         <h1 className="font-cormorant text-2xl sm:text-3xl md:text-4xl font-semibold tracking-wide leading-tight">
           Captured Memories
         </h1>
@@ -87,19 +131,19 @@ export default function Pics({ theme = 'dark' }) {
         {items.length > 0 ? (
           <DepthCarousel
             items={items}
-            depth={230}
-            spread={100}
-            tilt={20}
+            depth={carouselConfig.depth}
+            spread={carouselConfig.spread}
+            tilt={18}
             tiltDirection="right"
-            perspective={1400}
-            visibleCards={4}
+            perspective={1200}
+            visibleCards={carouselConfig.visibleCards}
             falloff={0.2}
             blur={5}
             autoplay={false}
             loop
-            cardWidth={360}
-            cardHeight={470}
-            radius={24}
+            cardWidth={carouselConfig.cardWidth}
+            cardHeight={carouselConfig.cardHeight}
+            radius={20}
             tint={isDark ? '#05060a' : '#1e0817'}
             duration={700}
             ease="power3.out"

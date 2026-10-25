@@ -44,7 +44,7 @@ const InteractivePhotoStack = React.forwardRef(
       >
         {/* Outer Hit Area: covers the entire spread radius so cursor never falls through gaps */}
         <div
-          className="relative w-full max-w-[480px] h-[450px] sm:h-[480px] cursor-pointer flex items-center justify-center mx-auto"
+          className="relative w-full max-w-[480px] h-[380px] xs:h-[420px] sm:h-[480px] cursor-pointer flex items-center justify-center mx-auto touch-pan-y"
           onMouseEnter={() => setIsGroupHovered(true)}
           onMouseLeave={() => {
             if (clickedIndex === null) {
@@ -57,8 +57,8 @@ const InteractivePhotoStack = React.forwardRef(
             setIsGroupHovered((prev) => !prev);
           }}
         >
-          {/* Card Anchor Point */}
-          <div className="relative h-80 w-64">
+          {/* Card Anchor Point - Dynamically scaled on mobile viewports so 480px spread never clips */}
+          <div className="relative h-80 w-64 scale-[0.70] xs:scale-[0.80] sm:scale-100 origin-center transition-transform duration-300">
             {displayedItems.map((item, index) => {
               const isTopCard = index === topCardIndex;
               const numItems = displayedItems.length;
