@@ -1,0 +1,380 @@
+/* ──────────────── Vinyl Music Player Popup Styles ──────────────── */
+
+.vinyl-popup {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 50;
+  width: 320px;
+  animation: vinylFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (min-width: 640px) {
+  .vinyl-popup {
+    width: 340px;
+  }
+}
+
+@keyframes vinylFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.vinyl-card {
+  position: relative;
+  width: 100%;
+  border-radius: 28px;
+  padding: 22px 20px 18px;
+  box-sizing: border-box;
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  transition: all 0.35s ease;
+  user-select: none;
+}
+
+/* Dark mode styling */
+.vinyl-card.theme-dark {
+  background: rgba(18, 14, 24, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 35px rgba(244, 63, 94, 0.18);
+}
+
+/* Light mode styling */
+.vinyl-card.theme-light {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(244, 63, 94, 0.18);
+  color: #1a1a1a;
+  box-shadow: 0 20px 45px rgba(244, 63, 94, 0.15), 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.vinyl-card.is-playing {
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.7), 0 0 45px rgba(244, 63, 94, 0.28);
+}
+
+/* Close button inside popup */
+.vinyl-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: currentColor;
+  opacity: 0.6;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  transition: all 0.2s;
+  z-index: 10;
+}
+
+.vinyl-close-btn:hover {
+  opacity: 1;
+  background: rgba(244, 63, 94, 0.2);
+  transform: scale(1.08);
+}
+
+/* ──────────────── Disc & Cover ──────────────── */
+
+.vinyl-card .mask {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  margin: 4px auto 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), inset 0 0 0 4px #111;
+  background: #08080a;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.vinyl-card .mask:hover {
+  transform: scale(1.04);
+}
+
+.vinyl-card .mask.is-zoomed {
+  transform: scale(1.18);
+  z-index: 20;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(244, 63, 94, 0.3);
+}
+
+.vinyl-card .spin {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  will-change: transform;
+}
+
+.vinyl-card .cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.vinyl-card .cover-enter {
+  animation: coverEnter 0.5s ease-out forwards;
+}
+
+.vinyl-card .cover-exit {
+  animation: coverExit 0.5s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes coverEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.9) rotate(20deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes coverExit {
+  from {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.08) rotate(-20deg);
+  }
+}
+
+/* Spindle hole in center of record */
+.vinyl-card .hole {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #141018;
+  border: 3.5px solid #f43f5e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.8);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.vinyl-card .hole-inner {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #000;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ──────────────── ScalesMixer Frequency Visualizer ──────────────── */
+
+.vinyl-card .scales {
+  width: 82px;
+  height: 72px;
+  margin: 0 auto 8px;
+  display: block;
+  fill: #f43f5e;
+  opacity: 0.85;
+}
+
+/* ──────────────── Track Information ──────────────── */
+
+.vinyl-card .track-info {
+  position: relative;
+  height: 44px;
+  text-align: center;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.vinyl-card .ti-layer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.vinyl-card .ti-abs {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.vinyl-card .artist {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  color: #f43f5e;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.vinyl-card .track {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 2px 0 0;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90%;
+}
+
+.vinyl-card .ti-enter {
+  animation: tiEnter 0.4s ease-out forwards;
+}
+
+.vinyl-card .ti-exit {
+  animation: tiExit 0.4s ease-out forwards;
+}
+
+@keyframes tiEnter {
+  from {
+    opacity: 0;
+    transform: translateX(var(--dx, 14px));
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes tiExit {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(calc(var(--dx, 14px) * -1));
+  }
+}
+
+/* ──────────────── Progress Bar & Time ──────────────── */
+
+.vinyl-card .bar {
+  width: 100%;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.theme-light .vinyl-card .bar {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.vinyl-card .bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f43f5e, #fb7185);
+  border-radius: 999px;
+  transition: width 0.1s linear;
+}
+
+.vinyl-card .time {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  opacity: 0.6;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 4px;
+}
+
+.vinyl-card .sep {
+  opacity: 0.4;
+  margin: 0 4px;
+}
+
+/* ──────────────── Controls ──────────────── */
+
+.vinyl-card .controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 6px 0;
+}
+
+.vinyl-card .ctrl {
+  background: transparent;
+  border: none;
+  color: inherit;
+  opacity: 0.65;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.vinyl-card .ctrl:hover {
+  opacity: 1;
+  transform: scale(1.12);
+}
+
+.vinyl-card .ctrl-toggle.is-active {
+  color: #f43f5e;
+  opacity: 1;
+}
+
+.vinyl-card .ctrl-play {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f43f5e, #e11d48);
+  color: #fff;
+  opacity: 1;
+  box-shadow: 0 4px 16px rgba(244, 63, 94, 0.45);
+}
+
+.vinyl-card .ctrl-play:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 22px rgba(244, 63, 94, 0.6);
+}
+
+.vinyl-card .ctrl-loop.mode-one .loop-one {
+  display: inline-block;
+  font-size: 8px;
+  font-weight: bold;
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  background: #f43f5e;
+  color: #fff;
+  border-radius: 50%;
+  width: 11px;
+  height: 11px;
+  line-height: 11px;
+  text-align: center;
+}
+
+.vinyl-card .loop-one {
+  display: none;
+}
