@@ -30,9 +30,9 @@ const polaroidSlides = [
   },
   {
     image: polaroid4,
-    title: 'My Favorite Kiss ❤️',
-    caption: 'The sweetest moment that made my heart skip a thousand beats.',
-    alt: 'Sweet kiss',
+    title: 'Side by Side with You ❤️',
+    caption: 'Every place feels special as long as I have you right beside me.',
+    alt: 'Side by side together',
   },
   {
     image: polaroid5,
@@ -160,6 +160,24 @@ export default function Us({ theme = 'dark' }) {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  // Automatically advance milestone photos every 3.5 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActivePhotoIdx((prev) => {
+        const updated = { ...prev };
+        milestones.forEach((item) => {
+          if (item.images.length > 1) {
+            const current = prev[item.id] || 0;
+            updated[item.id] = (current + 1) % item.images.length;
+          }
+        });
+        return updated;
+      });
+    }, 3500);
+
+    return () => clearInterval(timer);
   }, []);
 
   const [stageHeight, setStageHeight] = useState(() => (typeof window !== 'undefined' && window.innerWidth < 640 ? 370 : 420));
@@ -404,11 +422,12 @@ export default function Us({ theme = 'dark' }) {
                         : 'border-purple-200/80 bg-white shadow-md'
                     }`}
                   >
-                    <div className="aspect-[3/4] sm:aspect-[4/5] w-full max-h-[580px] overflow-hidden bg-neutral-900/5">
+                    <div className="aspect-[3/4] sm:aspect-[4/5] w-full max-h-[580px] overflow-hidden bg-neutral-900/5 relative">
                       <img
+                        key={currentIdx}
                         src={currentPhoto}
                         alt={`${item.title} memory`}
-                        className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${
+                        className={`w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105 animate-fade-in ${
                           item.imgPosition || 'object-top'
                         }`}
                         loading="lazy"

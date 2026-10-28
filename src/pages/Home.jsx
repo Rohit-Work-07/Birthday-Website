@@ -32,7 +32,6 @@ const rotatingTitles = [
 ];
 
 export default function Home({ setActivePage, theme = 'dark' }) {
-  const [isNoteOpen, setIsNoteOpen] = useState(false);
   const [titleIndex, setTitleIndex] = useState(0);
   const [fade, setFade] = useState(true);
   const [lifeStats, setLifeStats] = useState({ years: 24, days: 8766 });
@@ -110,27 +109,7 @@ export default function Home({ setActivePage, theme = 'dark' }) {
               </p>
             </div>
 
-            {/* "A little note about you" Button */}
-            <div className="pt-3 sm:pt-6">
-              <button
-                type="button"
-                onClick={() => setIsNoteOpen(true)}
-                className={`group inline-flex items-center gap-2 sm:gap-2.5 px-5 sm:px-7 py-2 sm:py-2.5 rounded-full text-sm sm:text-lg font-cormorant font-medium tracking-wide transition-all duration-300 border cursor-pointer ${
-                  isDark
-                    ? 'border-red-500/40 bg-red-500/10 hover:bg-red-500/20 text-white shadow-[0_0_20px_rgba(239,68,68,0.25)] hover:shadow-[0_0_30px_rgba(239,68,68,0.5)]'
-                    : 'border-red-400/50 bg-red-50 hover:bg-red-100 text-gray-900 shadow-sm hover:shadow-md'
-                } hover:scale-105 active:scale-95`}
-              >
-                <svg
-                  className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-red-400 group-hover:scale-110 transition-transform duration-300"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                </svg>
-                <span>A little note about you</span>
-              </button>
-            </div>
+
           </div>
         </div>
 
@@ -313,75 +292,7 @@ export default function Home({ setActivePage, theme = 'dark' }) {
       </footer>
 
 
-      {/* ──────────────── MODAL: "A LITTLE NOTE ABOUT YOU" ──────────────── */}
-      {isNoteOpen && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          onClick={() => setIsNoteOpen(false)}
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 xs:p-4 bg-black/60 backdrop-blur-md animate-fade-in"
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className={`relative w-full max-w-lg max-h-[90dvh] overflow-y-auto p-6 xs:p-8 sm:p-10 rounded-2xl sm:rounded-3xl border shadow-2xl transition-all duration-300 ${
-              isDark
-                ? 'bg-[#0f1017]/95 border-white/15 text-white shadow-[0_0_50px_rgba(0,0,0,0.8)]'
-                : 'bg-white/95 border-black/10 text-gray-900 shadow-2xl'
-            }`}
-          >
-            {/* Close Button */}
-            <button
-              type="button"
-              onClick={() => setIsNoteOpen(false)}
-              className="absolute top-4 right-4 sm:top-5 sm:right-5 p-2 rounded-full opacity-60 hover:opacity-100 hover:scale-110 transition-all cursor-pointer"
-              aria-label="Close note"
-            >
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </button>
 
-            {/* Note Header */}
-            <div className="flex items-center gap-2 mb-6">
-              <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-              <h3 className="font-cormorant text-2xl sm:text-3xl font-medium tracking-wide">
-                A Little Note About You
-              </h3>
-            </div>
-
-            {/* Note Content Area */}
-            <div className="font-cormorant text-lg sm:text-xl font-light leading-relaxed tracking-wide space-y-4 text-left opacity-90 min-h-[140px] flex items-center justify-center border border-dashed border-red-500/20 rounded-2xl p-6">
-              <p className="italic text-center text-red-300/80">
-                (Write your heartfelt note here)
-              </p>
-            </div>
-
-            {/* Footer */}
-            <div className="mt-8 flex items-center justify-between pt-4 border-t border-white/10 text-xs sm:text-sm font-cormorant">
-              {setActivePage && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIsNoteOpen(false);
-                    setActivePage('pics');
-                  }}
-                  className="text-red-400 hover:text-red-300 underline underline-offset-4 cursor-pointer transition-colors"
-                >
-                  Explore Gallery &rarr;
-                </button>
-              )}
-              <button
-                type="button"
-                onClick={() => setIsNoteOpen(false)}
-                className="ml-auto px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 transition-colors cursor-pointer"
-              >
-                Close with love
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
